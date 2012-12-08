@@ -11,7 +11,6 @@ public class Main {
 				System.in));
 
 		BaseMenu.printMenu();
-		CarsMenu.allCars();
 		for (;;) {
 			String key = reader.readLine();
 			if (key.equals("quit"))
