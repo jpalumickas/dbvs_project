@@ -1,0 +1,20 @@
+Cars:
+
+* cars - Visu automobiliu sarasas [Done]
+* add car - Prideti automobili [Done]
+* delete car with id 1 - Istrinti automobili su id 1
+* who is driving with car 1 - Parodyti visus automobilio vairuotojus
+
+Employees:
+
+* employees - Visu darbuotoju sarasas
+
+Secondments:
+
+* secondments - Visu komandiruociu sarasas
+* show secondments between * til *
+
+Fuel vouchers:
+
+* show fuel vouchers of employee 1
+* who consumed the fuel mostly in this month (daugiausiai suvartojes benzino zmogus)
