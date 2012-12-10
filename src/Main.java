@@ -5,13 +5,17 @@ import java.sql.*;
 import database.*;
 import menu.*;
 
-public class Main {
+public class Main
+{
 	public static void main(String[] args) throws IOException
 	{
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 		CarsMenu carsMenu = new CarsMenu();
+		
 		BaseMenu.printMenu();
+		
+		System.out.println(DatabaseConfig.USERNAME);
 		for (;;)
 		{
 			String key = reader.readLine();
