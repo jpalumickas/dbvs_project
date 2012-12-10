@@ -15,7 +15,7 @@ public class Main
 		PositionsMenu positionsMenu = new PositionsMenu();
 		EmployeesMenu employeesMenu = new EmployeesMenu();
 		
-		BaseMenu.printMenu();
+		BaseMenu.printSmallMenu();
 
 		for (;;)
 		{
@@ -25,15 +25,21 @@ public class Main
 				System.out.println("Programa isjungiama.");
 				break;
 			}
+			// Base Menu
 			else if (key.equals("menu")) BaseMenu.printMenu(); 
 			else if (key.equals("menu cars")) carsMenu.printMenu();
+			else if (key.equals("menu positions")) positionsMenu.printMenu();
 			
+			// Cars Menu
 			else if (key.equals("cars")) carsMenu.allCars();
 			else if (key.equals("add car")) carsMenu.addCar();
 			
+			// Positions Menu
 			else if (key.equals("positions")) positionsMenu.allPositions();
 			else if (key.equals("add position")) positionsMenu.addPosition();
 			else if (key.equals("remove position")) positionsMenu.removePosition();
+			
+			// Employees Menu
 			else if (key.equals("employees")) employeesMenu.allEmployees();
 		}
 	}

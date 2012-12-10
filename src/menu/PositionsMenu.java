@@ -8,6 +8,14 @@ import main.*;
 
 public class PositionsMenu
 {
+	public void printMenu()
+	{
+		System.out.println("Pareigu meniu:");
+		System.out.println("positions - Spausdinti visas pareigas.");
+		System.out.println("add position - Prideti naujas pareigas.");
+		System.out.println("remove position - Istrinti pareigas.");
+		System.out.println("");
+	}
 
 	public void allPositions()
 	{
