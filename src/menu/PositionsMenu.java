@@ -10,10 +10,18 @@ public class PositionsMenu
 {
 	public void printMenu()
 	{
-		System.out.println("Pareigu meniu:");
-		System.out.println("positions - Spausdinti visas pareigas.");
-		System.out.println("add position - Prideti naujas pareigas.");
-		System.out.println("remove position - Istrinti pareigas.");
+		this.printMenu(true);
+	}
+	public void printMenu(Boolean showHeader)
+	{
+		if (showHeader)
+		System.out.println("\t############     PAREIGU   MENIU     ############");
+		System.out.println("\t#                                               #");
+		System.out.println("\t#  positions - Spausdinti visas pareigas.       #");
+		System.out.println("\t#  add position - Prideti naujas pareigas.      #");
+		System.out.println("\t#  remove position - Istrinti pareigas.         #");
+		System.out.println("\t#                                               #");
+		System.out.println("\t#################################################");
 		System.out.println("");
 	}
 
@@ -92,5 +100,21 @@ public class PositionsMenu
 		catch (org.postgresql.util.PSQLException e) { System.out.println("\tKlaida istrintant pareigas. Patikrinkite ar pareigos nera naudojamos."); }
 		catch (SQLException e) { e.printStackTrace(); }
 		finally { DatabaseConnection.closeConnection(conn); }
+	}
+	
+	public boolean isValidPosition(int position_id)
+	{
+		Connection conn = null;
+		Boolean found = false;
+		try
+		{
+			conn = DatabaseConnection.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM positions WHERE id = '"+position_id+"'");
+			while (rs.next()) { found = true; } 
+		}
+		catch (SQLException e) { e.printStackTrace(); }
+		finally { DatabaseConnection.closeConnection(conn); }
+		return found;
 	}
 }

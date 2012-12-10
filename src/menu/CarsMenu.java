@@ -16,9 +16,12 @@ public class CarsMenu {
 
 	public static void printMenu()
 	{
-		System.out.println("Automobiliu meniu:");
-		System.out.println("cars - Spausdinti visus automobilius.");
-		System.out.println("add car - Prideti nauja automobili.");
+		System.out.println("\t############    AUTOMOBILIU MENIU    ############");
+		System.out.println("\t#                                               #");
+		System.out.println("\t#  cars - Spausdinti visus automobilius.        #");
+		System.out.println("\t#  add car - Prideti nauja automobili.          #");
+		System.out.println("\t#                                               #");
+		System.out.println("\t#################################################");
 		System.out.println("");
 	}
 

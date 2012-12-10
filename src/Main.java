@@ -22,12 +22,13 @@ public class Main
 			String key = reader.readLine();
 			if (key.equals("quit"))
 			{
-				System.out.println("Programa isjungiama.");
+				System.out.println("\tPrograma isjungiama...");
 				break;
 			}
 			// Base Menu
 			else if (key.equals("menu")) BaseMenu.printMenu(); 
 			else if (key.equals("menu cars")) carsMenu.printMenu();
+			else if (key.equals("menu employees")) employeesMenu.printMenu();
 			else if (key.equals("menu positions")) positionsMenu.printMenu();
 			
 			// Cars Menu
@@ -41,6 +42,7 @@ public class Main
 			
 			// Employees Menu
 			else if (key.equals("employees")) employeesMenu.allEmployees();
+			else if (key.equals("add employee")) employeesMenu.addEmployee();
 		}
 	}
 }

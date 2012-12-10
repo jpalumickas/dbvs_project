@@ -4,16 +4,21 @@ public class BaseMenu {
 
 	public static void printMenu()
 	{
-		System.out.println("menu - Spausdinti meniu.");
-		System.out.println("menu cars - Spausdinti automobiliu meniu.");
-		System.out.println("menu positions - Spausdinti pareigu meniu.");
-		System.out.println("quit - Iseiti is programos.");
+		System.out.println("\t#################################################");
+		System.out.println("\t#                                               #");
+		System.out.println("\t#  menu - Spausdinti meniu.                     #");
+		System.out.println("\t#  menu cars - Spausdinti automobiliu meniu.    #");
+		System.out.println("\t#  menu employees - Spausdinti darbuotoju meniu.#");
+		System.out.println("\t#  menu positions - Spausdinti pareigu meniu.   #");
+		System.out.println("\t#  quit - Iseiti is programos.                  #");
+		System.out.println("\t#                                               #");
+		System.out.println("\t#################################################");
 		System.out.println("");
 	}
 	
 	public static void printSmallMenu()
 	{
-		System.out.println("menu - Spausdinti meniu, quit - Iseiti\n");
+		System.out.println("\tmenu - Spausdinti meniu, quit - Iseiti\n");
 	}
 	
 }
