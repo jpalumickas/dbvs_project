@@ -12,10 +12,11 @@ public class Main
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 		CarsMenu carsMenu = new CarsMenu();
+		PositionsMenu positionsMenu = new PositionsMenu();
+		EmployeesMenu employeesMenu = new EmployeesMenu();
 		
 		BaseMenu.printMenu();
-		
-		System.out.println(DatabaseConfig.USERNAME);
+
 		for (;;)
 		{
 			String key = reader.readLine();
@@ -26,9 +27,14 @@ public class Main
 			}
 			else if (key.equals("menu")) BaseMenu.printMenu(); 
 			else if (key.equals("menu cars")) carsMenu.printMenu();
+			
 			else if (key.equals("cars")) carsMenu.allCars();
 			else if (key.equals("add car")) carsMenu.addCar();
-
+			
+			else if (key.equals("positions")) positionsMenu.allPositions();
+			else if (key.equals("add position")) positionsMenu.addPosition();
+			else if (key.equals("remove position")) positionsMenu.removePosition();
+			else if (key.equals("employees")) employeesMenu.allEmployees();
 		}
 	}
 }

@@ -5,6 +5,13 @@ Cars:
 * delete car with id 1 - Istrinti automobili su id 1
 * who is driving with car 1 - Parodyti visus automobilio vairuotojus
 
+
+Positions
+
+* positions - Visu pareigu sarasas [Done]
+* add position - Prideti pareigas [Done]
+* remove position - Istrinti pareigas [Done]
+
 Employees:
 
 * employees - Visu darbuotoju sarasas
