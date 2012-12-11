@@ -1,4 +1,4 @@
-DBVS Procect in University
+DBVS Project in University
 ============
 
 DBVS Project written in Java language, which manage fuel consuption in work.
