@@ -30,6 +30,12 @@ public class CarsMenu {
 	// Cars
 	public void allCars()
 	{
+		if (this.countCars() <= 0)
+		{
+			System.out.println("\tAutomobiliu sarasas tuscias. Jei norite prideti rasykite \"add car\".");
+			return;
+		}
+		
 		System.out.println("\tAutomobiliai:");
 		Connection conn = null;
 		try
@@ -121,6 +127,36 @@ public class CarsMenu {
 		finally { DatabaseConnection.closeConnection(conn); }
 	}
 	
+	public void removeCar()
+	{
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		this.allCars();
+		
+		int car_id = 0;
+		System.out.println("\tIveskite automobilio id, kuri norite istrinti:");
+		try { car_id = Integer.parseInt(reader.readLine()); } catch (IOException e) {  }
+		while ( ! this.isValidCar(car_id))
+		{
+			System.out.println("\tToks automobilis nerastas! Iveskite nauja:");
+			try { car_id = Integer.parseInt(reader.readLine()); } catch (IOException e) {  }
+		}
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try
+		{
+			conn = DatabaseConnection.getConnection();
+			stmt = conn.prepareStatement("DELETE FROM cars WHERE id = ?");
+			stmt.setInt(1, car_id);
+			stmt.executeUpdate();
+			
+			System.out.println("\tAutomobilis istrintas.");
+		}
+		catch (org.postgresql.util.PSQLException e) { System.out.println("\tKlaida istrintant automobili. Patikrinkite ar automobilis nera naudojamos."); }
+		catch (SQLException e) { e.printStackTrace(); }
+		finally { DatabaseConnection.closeConnection(conn); }
+	}
+	
 	public boolean isValidCar(int car_id)
 	{
 		Connection conn = null;
@@ -137,6 +173,22 @@ public class CarsMenu {
 		return found;
 	}
 	
+	public int countCars()
+	{
+		Connection conn = null;
+		int count = 0;
+		try
+		{
+			conn = DatabaseConnection.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS count FROM cars");
+			while (rs.next()) { count = rs.getInt("count"); } 
+		}
+		catch (SQLException e) { e.printStackTrace(); }
+		finally { DatabaseConnection.closeConnection(conn); }
+		return count;
+	}
+	
 	// Car employees
 	public void allCarEmployees()
 	{
@@ -151,7 +203,14 @@ public class CarsMenu {
 			System.out.println("\tToks automobilis nerastas! Iveskite nauja:");
 			try { car_id = Integer.parseInt(reader.readLine()); } catch (IOException e) { e.printStackTrace(); }
 		}
-		System.out.println("\t\nAutomobili vairuojantys darbuotojai:");
+		
+		if (this.countCarEmployees(car_id) <= 0)
+		{
+			System.out.println("\n\tNera darbuotoju, kurie vairuotu sita automobili.");
+			return;
+		}
+		
+		System.out.println("\n\tAutomobili vairuojantys darbuotojai:");
 		
 		Connection conn = null;
 		try
@@ -213,33 +272,68 @@ public class CarsMenu {
 			}
 			catch (SQLException e) { System.out.println("\tDarbuotojas su id "+car_employees[i]+" nebuvo ikeltas. Gali buti, kad jau egzistuoja sarase."); }
 			finally { DatabaseConnection.closeConnection(conn); }
-		}
-		
+		}	
 	}
 	
-	public void removeSecondmentType()
+	public void removeCarEmployees()
 	{
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		//this.allSecondmentTypes();
-		System.out.println("Istrinti komandiruotes tipa:");
+		int car_id = 0;
+		String car_employees_input = "";
+		Integer car_employees[];
 		
-		int secondment_type_id = 0;
-		System.out.println("\tIveskite komandiruotes tipo id, kuri norite istrinti:");
-		try { secondment_type_id = Integer.parseInt(reader.readLine()); } catch (IOException e) { e.printStackTrace(); }
+		this.allCars();
+		System.out.println("\tIveskite automobilio id:");
+		try { car_id = Integer.parseInt(reader.readLine()); } catch (IOException e) {  }
+		while ( ! this.isValidCar(car_id))
+		{
+			System.out.println("\tToks automobilis nerastas! Iveskite nauja:");
+			try { car_id = Integer.parseInt(reader.readLine()); } catch (IOException e) {  }
+		}
+		
+		this.employeesMenu.allEmployees();
+		System.out.println("\tIveskite darbuotoju id atskirdami kableliu: (Pvz.: 1,2,3)");
+		try { car_employees_input = reader.readLine(); } catch (IOException e) { e.printStackTrace(); }
+		car_employees = Functions.getIdsFromSting(car_employees_input);
+		while (car_employees.length == 0)
+		{
+			System.out.println("\tJokie darbuotojai neivesti! Iveskite per naujo:");
+			try { car_employees_input = reader.readLine(); } catch (IOException e) { e.printStackTrace(); }
+			car_employees = Functions.getIdsFromSting(car_employees_input);
+		}
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		for (int i = 0; i < car_employees.length; i++)
+		{
+			try
+			{
+				conn = DatabaseConnection.getConnection();
+
+				stmt = conn.prepareStatement("DELETE FROM car_employees WHERE car_id = ? AND employee_id = ?");
+				stmt.setInt(1, car_id);
+				stmt.setInt(2, car_employees[i]);
+				stmt.executeUpdate();
+				System.out.println("\tDarbuotojas su id "+car_employees[i]+" istrintas is automobilio saraso.");
+			}
+			catch (SQLException e) { e.printStackTrace(); }
+			finally { DatabaseConnection.closeConnection(conn); }
+		}	
+	}
+	
+	public int countCarEmployees(int car_id)
+	{
+		Connection conn = null;
+		int count = 0;
 		try
 		{
 			conn = DatabaseConnection.getConnection();
-			stmt = conn.prepareStatement("DELETE FROM secondment_types WHERE id = ?");
-			stmt.setInt(1, secondment_type_id);
-			stmt.executeUpdate();
-			
-			System.out.println("\tKomandiruotes tipas istrintas.");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS count FROM car_employees WHERE car_id = '"+car_id+"'");
+			while (rs.next()) { count = rs.getInt("count"); } 
 		}
-		catch (org.postgresql.util.PSQLException e) { System.out.println("\tKlaida istrintant komandiruotes tipa.\n\tPatikrinkite ar komandiruotes tipas nera naudojamos."); }
 		catch (SQLException e) { e.printStackTrace(); }
 		finally { DatabaseConnection.closeConnection(conn); }
+		return count;
 	}
 }

@@ -36,8 +36,10 @@ public class Main
 			// Cars Menu
 			else if (key.equals("cars")) carsMenu.allCars();
 			else if (key.equals("add car")) carsMenu.addCar();
+			else if (key.equals("remove car")) carsMenu.removeCar();
 			else if (key.equals("car employees")) carsMenu.allCarEmployees();
 			else if (key.equals("add car employees")) carsMenu.addCarEmployees();
+			else if (key.equals("remove car employees")) carsMenu.removeCarEmployees();
 			
 			// Positions Menu
 			else if (key.equals("positions")) positionsMenu.allPositions();
@@ -52,6 +54,7 @@ public class Main
 			// Employees Menu
 			else if (key.equals("employees")) employeesMenu.allEmployees();
 			else if (key.equals("add employee")) employeesMenu.addEmployee();
+			else if (key.equals("remove employee")) employeesMenu.removeEmployee();
 			
 			else System.out.println("Tokia komanda neegzistuoja.");
 		}

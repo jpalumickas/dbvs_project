@@ -24,11 +24,17 @@ public class EmployeesMenu
 	
 	public void allEmployees()
 	{
-		System.out.println("Darbuotojai:");
+		if (this.countEmployees() <= 0)
+		{
+			System.out.println("\tDarbuotoju sarasas tuscias. Jei norite prideti rasykite \"add employee\".");
+			return;
+		}
+		
+		System.out.println("\tDarbuotojai:");
 		Connection conn = null;
 		try
 		{
-			System.out.printf("%3s  %-12s   %-12s   %-12s   %-8s   %-13s   %-7s%n", "Id", "Vardas", "Pavarde", "Gimimo diena", "Lytis", "Asmens kodas", "Pareigos");
+			System.out.printf("\t%3s  %-12s   %-12s   %-12s   %-8s   %-13s   %-7s%n", "Id", "Vardas", "Pavarde", "Gimimo diena", "Lytis", "Asmens kodas", "Pareigos");
 
 			conn = DatabaseConnection.getConnection();
 			Statement stmt = conn.createStatement();
@@ -37,7 +43,7 @@ public class EmployeesMenu
 			{
 
 				String sex = (rs.getString("sex").equals("V")) ? "Vyras" : "Moteris";
-				System.out.printf("%3s  %-12s   %-12s   %-12s   %-8s   %-13s   %-7s%n",
+				System.out.printf("\t%3s  %-12s   %-12s   %-12s   %-8s   %-13s   %-7s%n",
 					rs.getString("id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("birthday"), sex, rs.getLong("dno"), rs.getString("position_name"));
 			}
 		}
@@ -49,7 +55,7 @@ public class EmployeesMenu
 	{
 		PositionsMenu positionsMenu = new PositionsMenu();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Prideti darbuotoja:");
+		System.out.println("\tPrideti darbuotoja:");
 
 		String first_name = "";
 		String last_name = "";
@@ -131,4 +137,66 @@ public class EmployeesMenu
 		finally { DatabaseConnection.closeConnection(conn); }
 	}
 	
+	public void removeEmployee()
+	{
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		this.allEmployees();
+		System.out.println("\tIstrinti darbuotoja:");
+		
+		int employee_id = 0;
+		System.out.println("\tIveskite darbuotojo id, kuri norite istrinti:");
+		try { employee_id = Integer.parseInt(reader.readLine()); } catch (IOException e) {  }
+		while ( ! this.isValidEmployee(employee_id))
+		{
+			System.out.println("\tToks darbuotojas nerastas! Iveskite nauja:");
+			try { employee_id = Integer.parseInt(reader.readLine()); } catch (IOException e) {  }
+		}
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try
+		{
+			conn = DatabaseConnection.getConnection();
+			stmt = conn.prepareStatement("DELETE FROM employees WHERE id = ?");
+			stmt.setInt(1, employee_id);
+			stmt.executeUpdate();
+			
+			System.out.println("\tDarbuotojas istrintas.");
+		}
+		catch (org.postgresql.util.PSQLException e) { System.out.println("\tKlaida istrintant darbuotoja. Patikrinkite ar darbuotojas nera naudojamos."); }
+		catch (SQLException e) { e.printStackTrace(); }
+		finally { DatabaseConnection.closeConnection(conn); }
+	}
+	
+	public boolean isValidEmployee(int employee_id)
+	{
+		Connection conn = null;
+		Boolean found = false;
+		try
+		{
+			conn = DatabaseConnection.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM employees WHERE id = '"+employee_id+"'");
+			while (rs.next()) { found = true; } 
+		}
+		catch (SQLException e) { e.printStackTrace(); }
+		finally { DatabaseConnection.closeConnection(conn); }
+		return found;
+	}
+	
+	public int countEmployees()
+	{
+		Connection conn = null;
+		int count = 0;
+		try
+		{
+			conn = DatabaseConnection.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS count FROM employees");
+			while (rs.next()) { count = rs.getInt("count"); } 
+		}
+		catch (SQLException e) { e.printStackTrace(); }
+		finally { DatabaseConnection.closeConnection(conn); }
+		return count;
+	}
 }

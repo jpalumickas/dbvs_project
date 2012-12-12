@@ -28,18 +28,24 @@ public class PositionsMenu
 
 	public void allPositions()
 	{
-		System.out.println("Pareigos:");
+		if (this.countPositions() <= 0)
+		{
+			System.out.println("\tPareigu sarasas tuscias. Jei norite prideti rasykite \"add position\".");
+			return;
+		}
+		
+		System.out.println("\tPareigos:");
 		Connection conn = null;
 		try
 		{
-			System.out.printf("%3s  %-12s%n", "Id", "Pareigos");
+			System.out.printf("\t%3s  %-12s%n", "Id", "Pareigos");
 
 			conn = DatabaseConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM positions ORDER BY position_name");
 			while (rs.next())
 			{
-				System.out.printf("%3s  %-12s%n", rs.getString("id"), rs.getString("position_name"));
+				System.out.printf("\t%3s  %-12s%n", rs.getString("id"), rs.getString("position_name"));
 			}
 		}
 		catch (SQLException e) { e.printStackTrace(); }
@@ -49,7 +55,7 @@ public class PositionsMenu
 	public void addPosition()
 	{
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Prideti naujas pareigas:");
+		System.out.println("\tPrideti naujas pareigas:");
 
 		String position_name = "";
 		
@@ -81,7 +87,7 @@ public class PositionsMenu
 	{
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		this.allPositions();
-		System.out.println("Istrinti pareigas:");
+		System.out.println("\tIstrinti pareigas:");
 		
 		int position_id = 0;
 		System.out.println("\tIveskite pareigos id, kuria norite istrinti:");
@@ -117,5 +123,21 @@ public class PositionsMenu
 		catch (SQLException e) { e.printStackTrace(); }
 		finally { DatabaseConnection.closeConnection(conn); }
 		return found;
+	}
+	
+	public int countPositions()
+	{
+		Connection conn = null;
+		int count = 0;
+		try
+		{
+			conn = DatabaseConnection.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS count FROM positions");
+			while (rs.next()) { count = rs.getInt("count"); } 
+		}
+		catch (SQLException e) { e.printStackTrace(); }
+		finally { DatabaseConnection.closeConnection(conn); }
+		return count;
 	}
 }
