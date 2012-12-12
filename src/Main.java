@@ -14,6 +14,7 @@ public class Main
 		CarsMenu carsMenu = new CarsMenu();
 		PositionsMenu positionsMenu = new PositionsMenu();
 		EmployeesMenu employeesMenu = new EmployeesMenu();
+		SecondmentsMenu secondmentsMenu = new SecondmentsMenu();
 		
 		BaseMenu.printSmallMenu();
 
@@ -30,6 +31,7 @@ public class Main
 			else if (key.equals("menu cars")) carsMenu.printMenu();
 			else if (key.equals("menu employees")) employeesMenu.printMenu();
 			else if (key.equals("menu positions")) positionsMenu.printMenu();
+			else if (key.equals("menu secondments")) secondmentsMenu.printMenu();
 			
 			// Cars Menu
 			else if (key.equals("cars")) carsMenu.allCars();
@@ -40,11 +42,16 @@ public class Main
 			else if (key.equals("add position")) positionsMenu.addPosition();
 			else if (key.equals("remove position")) positionsMenu.removePosition();
 			
+			// Secondment Types
+			else if (key.equals("secondment types")) secondmentsMenu.allSecondmentTypes();
+			else if (key.equals("add secondment type")) secondmentsMenu.addSecondmentType();
+			else if (key.equals("remove secondment type")) secondmentsMenu.removeSecondmentType();
+				
 			// Employees Menu
 			else if (key.equals("employees")) employeesMenu.allEmployees();
 			else if (key.equals("add employee")) employeesMenu.addEmployee();
 			
-			else System.out.println("Tokia komanda neegzistuoja.")
+			else System.out.println("Tokia komanda neegzistuoja.");
 		}
 	}
 }

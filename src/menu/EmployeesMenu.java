@@ -12,13 +12,13 @@ public class EmployeesMenu
 	{
 		PositionsMenu positionsMenu = new PositionsMenu();
 		
-		System.out.println("\t############    DARBUOTOJU  MENIU    ############");
-		System.out.println("\t#                                               #");
-		System.out.println("\t#  employees - Spausdinti visus darbuotojus.    #");
-		System.out.println("\t#  add employee - Prideti nauja darbuotoja.     #");
-		System.out.println("\t#  remove employee - Istrinti darbuotoja.       #");
-		System.out.println("\t#                                               #");
-		System.out.println("\t#################################################");
+		System.out.println("\t################    DARBUOTOJU  MENIU    ################");
+		System.out.println("\t#                                                       #");
+		System.out.println("\t#  employees - Spausdinti visus darbuotojus.            #");
+		System.out.println("\t#  add employee - Prideti nauja darbuotoja.             #");
+		System.out.println("\t#  remove employee - Istrinti darbuotoja.               #");
+		System.out.println("\t#                                                       #");
+		System.out.println("\t#########################################################");
 		positionsMenu.printMenu(false);
 	}
 	

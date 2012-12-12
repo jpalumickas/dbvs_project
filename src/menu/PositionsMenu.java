@@ -12,16 +12,17 @@ public class PositionsMenu
 	{
 		this.printMenu(true);
 	}
+	
 	public void printMenu(Boolean showHeader)
 	{
 		if (showHeader)
-		System.out.println("\t############     PAREIGU   MENIU     ############");
-		System.out.println("\t#                                               #");
-		System.out.println("\t#  positions - Spausdinti visas pareigas.       #");
-		System.out.println("\t#  add position - Prideti naujas pareigas.      #");
-		System.out.println("\t#  remove position - Istrinti pareigas.         #");
-		System.out.println("\t#                                               #");
-		System.out.println("\t#################################################");
+		System.out.println("\t################     PAREIGU   MENIU     ################");
+		System.out.println("\t#                                                       #");
+		System.out.println("\t#  positions - Spausdinti visas pareigas.               #");
+		System.out.println("\t#  add position - Prideti naujas pareigas.              #");
+		System.out.println("\t#  remove position - Istrinti pareigas.                 #");
+		System.out.println("\t#                                                       #");
+		System.out.println("\t#########################################################");
 		System.out.println("");
 	}
 
