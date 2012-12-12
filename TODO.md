@@ -1,18 +1,18 @@
 ##Cars
 
-		cars - Visu automobiliu sarasas **[Done]**
-		add car - Prideti automobili **[Done]**
-		delete car with id 1 - Istrinti automobili su id 1
-		car employees - Parodyti visus automobilio vairuotojus
-		add car employee
-		remove car employee
+	- cars - Visu automobiliu sarasas **[Done]**
+	- add car - Prideti automobili **[Done]**
+	- delete car with id 1 - Istrinti automobili su id 1
+	- car employees - Parodyti visus automobilio vairuotojus
+	- add car employee
+	- remove car employee
 
 
 ##Positions
 
-* positions - Visu pareigu sarasas **[Done]**
-* add position - Prideti pareigas **[Done]**
-* remove position - Istrinti pareigas **[Done]**
+	- positions - Visu pareigu sarasas **[Done]**
+	- add position - Prideti pareigas **[Done]**
+	- remove position - Istrinti pareigas **[Done]**
 
 ##Employees
 
