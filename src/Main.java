@@ -36,6 +36,8 @@ public class Main
 			// Cars Menu
 			else if (key.equals("cars")) carsMenu.allCars();
 			else if (key.equals("add car")) carsMenu.addCar();
+			else if (key.equals("car employees")) carsMenu.allCarEmployees();
+			else if (key.equals("add car employees")) carsMenu.addCarEmployees();
 			
 			// Positions Menu
 			else if (key.equals("positions")) positionsMenu.allPositions();

@@ -36,5 +36,16 @@ public class Functions
 		return false;
 	}
 	
+	public static Integer[] getIdsFromSting(String str)
+	{
+		String[] arrayOfStrings = str.replaceAll("\\D+", " ").trim().split(" ");
+		Integer[] arrayOfIntegers = new Integer[arrayOfStrings.length];
+		for (int i = 0; i < arrayOfStrings.length; i++)
+		{
+		    arrayOfIntegers[i] = Integer.valueOf(arrayOfStrings[i]);
+		}
+		return arrayOfIntegers;
+	}
+	
 
 }

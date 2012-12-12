@@ -41,7 +41,6 @@ public class EmployeesMenu
 					rs.getString("id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("birthday"), sex, rs.getLong("dno"), rs.getString("position_name"));
 			}
 		}
-		
 		catch (SQLException e) { e.printStackTrace(); }
 		finally { DatabaseConnection.closeConnection(conn); }
 	}
