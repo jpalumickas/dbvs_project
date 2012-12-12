@@ -43,6 +43,8 @@ public class Main
 			// Employees Menu
 			else if (key.equals("employees")) employeesMenu.allEmployees();
 			else if (key.equals("add employee")) employeesMenu.addEmployee();
+			
+			else System.out.println("Tokia komanda neegzistuoja.")
 		}
 	}
 }
