@@ -4,7 +4,7 @@
 - add car - Pridėti automobilį. **[Done]**
 - remove car - Ištrinti automobilį **[Done]**
 - car employees - Parodyti visus automobilio vairuotojus. **[Done]**
-- add car employees - Prideti prie automobilio vairuotojus. **[Done]**
+- add car employees - Pridėti prie automobilio vairuotojus. **[Done]**
 - remove car employees - Ištrinti iš automobilio vairuotojus. **[Done]**
 
 
@@ -16,7 +16,7 @@
 
 ##Employees
 
-- employees - Visų darbuotoju sarasas **[Done]**
+- employees - Visų darbuotojų sąrašas **[Done]**
 - add employee - Pridėti darbuotoją **[Done]**
 - remove employee - Ištrinti darbuotoją. **[Done]**
 
@@ -31,7 +31,7 @@
 - show secondments between dates
 
 ##Fuel vouchers
-- fuel vouchers - Visų kuro čiekių sąrašas. **[Done]**
+- fuel vouchers - Visų kuro čekių sąrašas. **[Done]**
 - add fuel voucher - Pridėti kuro čekį. **[Done]**
 - remove fuel voucher - Ištrinti kuro čekį. **[Done]**
 - show employee fuel vouchers
