@@ -1,5 +1,6 @@
 package main;
 
+import java.util.*;
 import java.text.*;
 
 public class Functions
@@ -46,6 +47,28 @@ public class Functions
 		}
 		return arrayOfIntegers;
 	}
+	
+
+
+	static final long ONE_HOUR = 60 * 60 * 1000L;
+	public static long calculateDays(String startDate, String endDate)
+	{
+		try 
+		{
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		  Date d1 = (Date)formatter.parse(startDate);
+		Date d2 = (Date)formatter.parse(endDate);
+		
+		return ( (d2.getTime() - d1.getTime() + ONE_HOUR) /
+                  (ONE_HOUR * 24));
+
+			 } catch (ParseException e)
+			  { return 0;  }  
+
+			 
+ 	}
+
+
 	
 
 }

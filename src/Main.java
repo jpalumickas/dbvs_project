@@ -47,6 +47,9 @@ public class Main
 			else if (key.equals("remove position")) positionsMenu.removePosition();
 			
 			// Secondment Types
+			else if (key.equals("secondments")) secondmentsMenu.allSecondments();
+			else if (key.equals("add secondment")) secondmentsMenu.addSecondment();
+			else if (key.equals("remove secondment")) secondmentsMenu.removeSecondment();
 			else if (key.equals("secondment types")) secondmentsMenu.allSecondmentTypes();
 			else if (key.equals("add secondment type")) secondmentsMenu.addSecondmentType();
 			else if (key.equals("remove secondment type")) secondmentsMenu.removeSecondmentType();
