@@ -140,8 +140,9 @@ public class EmployeesMenu
 	public void removeEmployee()
 	{
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		this.allEmployees();
 		System.out.println("\tIstrinti darbuotoja:");
+		
+		this.allEmployees();
 		
 		int employee_id = 0;
 		System.out.println("\tIveskite darbuotojo id, kuri norite istrinti:");

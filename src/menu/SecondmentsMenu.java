@@ -235,14 +235,14 @@ public class SecondmentsMenu
 		Connection conn = null;
 		try
 		{
-			System.out.printf("%3s  %-12s%n", "Id", "Tipas");
+			System.out.printf("\t%3s  %-12s%n", "Id", "Tipas");
 
 			conn = DatabaseConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM secondment_types ORDER BY name");
 			while (rs.next())
 			{
-				System.out.printf("%3s  %-12s%n", rs.getString("id"), rs.getString("name"));
+				System.out.printf("\t%3s  %-12s%n", rs.getString("id"), rs.getString("name"));
 			}
 		}
 		catch (SQLException e) { e.printStackTrace(); }

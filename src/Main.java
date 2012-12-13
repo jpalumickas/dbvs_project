@@ -9,18 +9,24 @@ public class Main
 {
 	public static void main(String[] args) throws IOException
 	{
+		// Command line buffer
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+		// Menus
 		CarsMenu carsMenu = new CarsMenu();
 		PositionsMenu positionsMenu = new PositionsMenu();
 		EmployeesMenu employeesMenu = new EmployeesMenu();
 		SecondmentsMenu secondmentsMenu = new SecondmentsMenu();
+		FuelVouchersMenu fuelvouchersMenu = new FuelVouchersMenu();
 		
+		// Print menu for the first time.
 		BaseMenu.printSmallMenu();
 
 		for (;;)
 		{
 			String key = reader.readLine();
+			
+			// Quit program
 			if (key.equals("quit"))
 			{
 				System.out.println("\tPrograma isjungiama...");
@@ -58,6 +64,11 @@ public class Main
 			else if (key.equals("employees")) employeesMenu.allEmployees();
 			else if (key.equals("add employee")) employeesMenu.addEmployee();
 			else if (key.equals("remove employee")) employeesMenu.removeEmployee();
+			
+			// Fuel Vouchers Menu
+			else if (key.equals("fuel vouchers")) fuelvouchersMenu.allFuelVouchers();
+			else if (key.equals("add fuel voucher")) fuelvouchersMenu.addFuelVoucher();
+			else if (key.equals("remove fuel voucher")) fuelvouchersMenu.removeFuelVoucher();
 			
 			else System.out.println("Tokia komanda neegzistuoja.");
 		}

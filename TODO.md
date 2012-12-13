@@ -23,7 +23,7 @@
 ##Secondments
 
 - secondments - Visų komandiruočių sąrašas. **[Done]**
-- add secondment - Pridėti komandiruotę prie sąrašo.**[Done]**
+- add secondment - Pridėti komandiruotę prie sąrašo. **[Done]**
 - remove secondment - Ištrinti komandiruotę iš sąrašo. **[Done]**
 - secondment types - Visų komandiruočiu tipų sąrašas. **[Done]**
 - add secondment type - Pridėti komandiruočių tipą. **[Done]**
@@ -31,8 +31,8 @@
 - show secondments between dates
 
 ##Fuel vouchers
-- fuel vouchers - Visų kuro čiekių sąrašas.
-- add fuel voucher - Pridėti kuro čekį.
-- remove fuel voucher - Ištrinti kuro čekį.
+- fuel vouchers - Visų kuro čiekių sąrašas. **[Done]**
+- add fuel voucher - Pridėti kuro čekį. **[Done]**
+- remove fuel voucher - Ištrinti kuro čekį. **[Done]**
 - show employee fuel vouchers
 - who consumed the fuel mostly in this month (daugiausiai suvartojes benzino zmogus)
