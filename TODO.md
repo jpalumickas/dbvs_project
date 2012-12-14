@@ -35,4 +35,6 @@
 - add fuel voucher - Pridėti kuro čekį. **[Done]**
 - remove fuel voucher - Ištrinti kuro čekį. **[Done]**
 - show employee fuel vouchers
-- who consumed the fuel mostly in this month (daugiausiai suvartojes benzino zmogus)
+
+##Statistics
+1. Žmogus, kuris įpylė daugiausiai benzino.

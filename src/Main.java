@@ -18,6 +18,7 @@ public class Main
 		EmployeesMenu employeesMenu = new EmployeesMenu();
 		SecondmentsMenu secondmentsMenu = new SecondmentsMenu();
 		FuelVouchersMenu fuelvouchersMenu = new FuelVouchersMenu();
+		StatisticsMenu statisticsMenu = new StatisticsMenu();
 		
 		// Print menu for the first time.
 		BaseMenu.printSmallMenu();
@@ -32,12 +33,14 @@ public class Main
 				System.out.println("\tPrograma isjungiama...");
 				break;
 			}
+			
 			// Base Menu
 			else if (key.equals("menu")) BaseMenu.printMenu(); 
 			else if (key.equals("menu cars")) carsMenu.printMenu();
 			else if (key.equals("menu employees")) employeesMenu.printMenu();
 			else if (key.equals("menu positions")) positionsMenu.printMenu();
 			else if (key.equals("menu secondments")) secondmentsMenu.printMenu();
+			else if (key.equals("menu statistics")) statisticsMenu.printMenu();
 			
 			// Cars Menu
 			else if (key.equals("cars")) carsMenu.allCars();
@@ -69,6 +72,9 @@ public class Main
 			else if (key.equals("fuel vouchers")) fuelvouchersMenu.allFuelVouchers();
 			else if (key.equals("add fuel voucher")) fuelvouchersMenu.addFuelVoucher();
 			else if (key.equals("remove fuel voucher")) fuelvouchersMenu.removeFuelVoucher();
+			
+			// Statistics Menu
+			else if (key.equals("statistics")) statisticsMenu.statistics();
 			
 			else System.out.println("Tokia komanda neegzistuoja.");
 		}
