@@ -220,6 +220,13 @@ public class CarsMenu {
 			conn = DatabaseConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT employees.first_name, employees.last_name FROM car_employees JOIN employees ON car_employees.employee_id = employees.id WHERE car_employees.car_id = '"+car_id+"' ORDER BY employees.first_name");
+			
+			if( ! rs.isBeforeFirst() )
+			{
+				System.out.println("\tNera darbuotoju, kurie vairuotu si automobili.");
+				return;
+			}
+			
 			while (rs.next())
 			{
 				System.out.printf("\t%-12s  %-12s%n", rs.getString("first_name"), rs.getString("last_name"));

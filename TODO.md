@@ -23,18 +23,18 @@
 ##Secondments
 
 - secondments - Visų komandiruočių sąrašas. **[Done]**
+- secondments between dates - Komandiruočių sąrašas tarp tam tikrų datų. **[Done]**
 - add secondment - Pridėti komandiruotę prie sąrašo. **[Done]**
 - remove secondment - Ištrinti komandiruotę iš sąrašo. **[Done]**
 - secondment types - Visų komandiruočiu tipų sąrašas. **[Done]**
 - add secondment type - Pridėti komandiruočių tipą. **[Done]**
 - remove secondment type - Ištrinti komandiruočių tipą. **[Done]**
-- show secondments between dates
 
 ##Fuel vouchers
 - fuel vouchers - Visų kuro čekių sąrašas. **[Done]**
 - add fuel voucher - Pridėti kuro čekį. **[Done]**
 - remove fuel voucher - Ištrinti kuro čekį. **[Done]**
-- show employee fuel vouchers
+- employee fuel vouchers - Tam tikro darbuotojo kuro čekiai. **[Done]**
 
 ##Statistics
-1. Žmogus, kuris įpylė daugiausiai benzino.
+1. Darbuotojas, kuris įpylė daugiausiai benzino.

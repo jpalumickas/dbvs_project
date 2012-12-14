@@ -57,6 +57,7 @@ public class Main
 			
 			// Secondment Types
 			else if (key.equals("secondments")) secondmentsMenu.allSecondments();
+			else if (key.equals("secondments between dates")) secondmentsMenu.allSecondmentsBetweenDates();
 			else if (key.equals("add secondment")) secondmentsMenu.addSecondment();
 			else if (key.equals("remove secondment")) secondmentsMenu.removeSecondment();
 			else if (key.equals("secondment types")) secondmentsMenu.allSecondmentTypes();
@@ -72,10 +73,13 @@ public class Main
 			else if (key.equals("fuel vouchers")) fuelvouchersMenu.allFuelVouchers();
 			else if (key.equals("add fuel voucher")) fuelvouchersMenu.addFuelVoucher();
 			else if (key.equals("remove fuel voucher")) fuelvouchersMenu.removeFuelVoucher();
+			else if (key.equals("employee fuel vouchers")) fuelvouchersMenu.employeeFuelVouchers();
 			
 			// Statistics Menu
 			else if (key.equals("statistics")) statisticsMenu.statistics();
+			else if (key.equals("statistics 1")) statisticsMenu.employee_who_filled_fuel_mostly();
 			
+			// Command not found.
 			else System.out.println("Tokia komanda neegzistuoja.");
 		}
 	}

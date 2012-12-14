@@ -17,6 +17,7 @@ public class FuelVouchersMenu
 		System.out.println("\t#  fuel vouchers - Spausdinti visus kuro cekius.        #");
 		System.out.println("\t#  add fuel voucher - Prideti nauja kuro ceki.          #");
 		System.out.println("\t#  remove fuel voucher - Istrinti kuro ceki.            #");
+		System.out.println("\t#  employee fuel vouchers - Darbuotojo kuro cekiai.     #");
 		System.out.println("\t#                                                       #");
 		System.out.println("\t#########################################################");
 		positionsMenu.printMenu(false);
@@ -154,6 +155,53 @@ public class FuelVouchersMenu
 			System.out.println("\tKuro cekis istrintas.");
 		}
 		catch (org.postgresql.util.PSQLException e) { System.out.println("\tKlaida istrintant kuro ceki. Patikrinkite ar kuro cekis nera naudojamos."); }
+		catch (SQLException e) { e.printStackTrace(); }
+		finally { DatabaseConnection.closeConnection(conn); }
+	}
+	
+	public void employeeFuelVouchers()
+	{
+		if (this.countFuelVouchers() <= 0)
+		{
+			System.out.println("\tKuro cekiu sarasas tuscias. Jei norite prideti rasykite \"add fuel voucher\".");
+			return;
+		}
+		
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		
+		int employee_id = 0;
+		
+		this.employeesMenu.allEmployees();
+		System.out.println("\tIveskite darbuotojo id, kuris pyle kura.");
+		try { employee_id = Integer.parseInt(reader.readLine()); } catch (IOException e) { e.printStackTrace(); }
+		while ( ! this.employeesMenu.isValidEmployee(employee_id))
+		{
+			System.out.println("\tToks darbuotojas nerastas! Meginkite dar karta:");
+			try { employee_id = Integer.parseInt(reader.readLine()); } catch (IOException e) { e.printStackTrace(); }
+		}
+		
+		System.out.println("\tDarbuotojo kuro cekiai:");
+		Connection conn = null;
+		try
+		{	
+			conn = DatabaseConnection.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM fuel_vouchers LEFT JOIN employees ON fuel_vouchers.employee_id = employees.id WHERE employee_id = '"+employee_id+"' ORDER BY fuel_vouchers.date");
+			
+			if( ! rs.isBeforeFirst() )
+			{
+				System.out.println("\tSio darbuotojo kuro cekiai nera ivesti.");
+				return;
+			}
+			
+			System.out.printf("\t%3s  %-10s   %-20s   %-14s   %-8s   %-18s   %-12s%n", "Id", "Data", "Darbuotojas", "Kaina uz litra", "Litrai", "Vieta", "Cekio numeris");
+			
+			while (rs.next())
+			{
+				System.out.printf("\t%3s  %-10s   %-20s   %-14s   %-8s   %-18s   %-12s%n",
+					rs.getString("id"), rs.getString("date"), rs.getString("first_name") + ' ' + rs.getString("last_name"), rs.getDouble("price_per_liter"), rs.getDouble("liters"), rs.getString("place"), rs.getString("voucher_code"));
+			}
+		}
 		catch (SQLException e) { e.printStackTrace(); }
 		finally { DatabaseConnection.closeConnection(conn); }
 	}

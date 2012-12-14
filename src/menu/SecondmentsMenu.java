@@ -14,6 +14,7 @@ public class SecondmentsMenu
 		System.out.println("\t################  KOMANDIRUOCIU   MENIU  ################");
 		System.out.println("\t#                                                       #");
 		System.out.println("\t#  secondments - Spausdinti visas komandiruotes.        #");
+		System.out.println("\t#  secondments between dates - Komandiruotes tarp datu. #");
 		System.out.println("\t#  add secondment - Prideti komandiruote.               #");
 		System.out.println("\t#  remove secondment - Istrinti komandiruote.           #");
 		System.out.println("\t#                                                       #");
@@ -57,6 +58,58 @@ public class SecondmentsMenu
 		catch (SQLException e) { e.printStackTrace(); }
 		finally { DatabaseConnection.closeConnection(conn); }
 	}
+	
+	public void allSecondmentsBetweenDates()
+	{
+		if (this.countSecondments() <= 0)
+		{
+			System.out.println("\tKomandiruociu sarasas tuscias. Jei norite prideti rasykite \"add secondment\".");
+			return;
+		}
+		
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		
+		String date_from = "";
+		String date_to = "";
+		
+		System.out.println("\tIveskite data, nuo kada rodyti komandiruotes: (Formatas yyyy-MM-dd)");
+		try { date_from = reader.readLine(); } catch (IOException e) { e.printStackTrace(); }
+		while ( ! Functions.isValidDate(date_from))
+		{
+			System.out.println("\tData nuo kada rodyti komandiruotes ivesta neteisingai! Iveskite nauja: (Formatas yyyy-MM-dd)");
+			try { date_from = reader.readLine(); } catch (IOException e) { e.printStackTrace(); }
+		}
+		
+		System.out.println("\tIveskite data, iki kada rodyti komandiruotes: (Formatas yyyy-MM-dd)");
+		try { date_to = reader.readLine(); } catch (IOException e) { e.printStackTrace(); }
+		while ( ! Functions.isValidDate(date_to))
+		{
+			System.out.println("\tData iki kada rodyti komandiruotes ivesta neteisingai! Iveskite nauja: (Formatas yyyy-MM-dd)");
+			try { date_to = reader.readLine(); } catch (IOException e) { e.printStackTrace(); }
+		}
+		
+		System.out.println("\tKomandiruotes nuo "+date_from+" iki "+date_to+":");
+		Connection conn = null;
+		try
+		{
+			DecimalFormat df = new DecimalFormat("#.##");
+			System.out.printf("\t%3s  %-20s   %-20s   %-20s   %-8s   %-13s   %-7s%n", "Id", "Marsrutas", "Tipas", "Automobilis", "Pinigai", "Nuvaziuota km", "Laikotarpis");
+
+			conn = DatabaseConnection.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT S.*,ST.name AS type, (c.make || ' ' || c.model) AS car FROM secondments S LEFT JOIN secondment_types ST ON S.type_id = ST.id LEFT JOIN cars c ON S.car_id = C.id WHERE S.from_date >= '"+date_from+"' AND S.to_date <= '"+date_to+"' ORDER BY S.to_date");
+			while (rs.next())
+			{
+				String period = Functions.calculateDays(rs.getString("from_date"), rs.getString("to_date")) + " d."; //("+rs.getString("from_date")+" - "+rs.getString("to_date")+")";
+				System.out.printf("\t%3s  %-20s   %-20s   %-20s   %-8s   %-13s   %-7s%n",
+					rs.getString("id"), rs.getString("from_where")+" - "+rs.getString("to_where"), rs.getString("type"), rs.getString("car"), rs.getString("money_for_secondment"), df.format(rs.getDouble("driven_km")), period);
+			}
+		}
+		catch (SQLException e) { e.printStackTrace(); }
+		finally { DatabaseConnection.closeConnection(conn); }
+	}
+	
+	
 	
 	public void addSecondment()
 	{
@@ -235,11 +288,18 @@ public class SecondmentsMenu
 		Connection conn = null;
 		try
 		{
-			System.out.printf("\t%3s  %-12s%n", "Id", "Tipas");
-
 			conn = DatabaseConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM secondment_types ORDER BY name");
+			
+			if( ! rs.isBeforeFirst() )
+			{
+				System.out.println("\tNera jokiu komandiruociu tipu. Jei norite ivesti ,rasykite \"add secondment type\".");
+				return;
+			}
+			
+			System.out.printf("\t%3s  %-12s%n", "Id", "Tipas");
+			
 			while (rs.next())
 			{
 				System.out.printf("\t%3s  %-12s%n", rs.getString("id"), rs.getString("name"));
