@@ -2,6 +2,7 @@ package menu;
 
 import java.sql.*;
 import java.io.*;
+import java.text.*;
 
 import database.DatabaseConnection;
 import main.*;
@@ -33,12 +34,13 @@ public class StatisticsMenu
 		Connection conn = null;
 		try
 		{
+			DecimalFormat df = new DecimalFormat("#.#");
 			conn = DatabaseConnection.getConnection();
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT fn, ln, MAX(sum) as maxsum FROM (SELECT SUM(fv.liters) as sum, e.id, e.first_name as fn, e.last_name as ln FROM fuel_vouchers fv LEFT JOIN employees e ON (fv.employee_id = e.id) GROUP BY fv.employee_id, e.id) as max");
+			ResultSet rs = stmt.executeQuery("SELECT fv.employee_id, sum(fv.liters), e.first_name, e.last_name FROM fuel_vouchers fv LEFT JOIN employees e ON fv.employee_id = e.id GROUP BY fv.employee_id, e.first_name, e.last_name ORDER BY 2 DESC LIMIT 1");
 			while (rs.next())
 			{
-				System.out.println(" ,kuris ipyle "+rs.getString("maxsum")+" litrus.");
+				System.out.println("\t"+rs.getString("first_name")+" "+rs.getString("last_name")+", kuris ipyle "+df.format(rs.getDouble("sum"))+" litrus.");
 			}
 		}
 		catch (SQLException e) { e.printStackTrace(); }

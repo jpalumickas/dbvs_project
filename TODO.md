@@ -32,9 +32,10 @@
 
 ##Fuel vouchers
 - fuel vouchers - Visų kuro čekių sąrašas. **[Done]**
+- fuel vouchers between dates - Kuro čekių sąrašas tarp tam tikrų datų.
 - add fuel voucher - Pridėti kuro čekį. **[Done]**
 - remove fuel voucher - Ištrinti kuro čekį. **[Done]**
 - employee fuel vouchers - Tam tikro darbuotojo kuro čekiai. **[Done]**
 
 ##Statistics
-1. Darbuotojas, kuris įpylė daugiausiai benzino.
+1. Darbuotojas, kuris įpylė daugiausiai benzino. **[Done]**
